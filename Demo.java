@@ -13,12 +13,10 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import org.firstinspires.ftc.teamcode.Arm;
 
+@TeleOp(name="Robot: Demo", group="Robot")
 
-@TeleOp(name="Robot: Omni", group="Robot")
-
-public class Omni extends LinearOpMode {
+public class Demo extends LinearOpMode {
 
     // Declare OpMode members for each of the motors.
     private ElapsedTime runtime = new ElapsedTime();
@@ -26,7 +24,6 @@ public class Omni extends LinearOpMode {
     private DcMotor backL = null;
     private DcMotor frontR = null;
     private DcMotor backR = null;
-    
     @Override
     public void runOpMode() {
 
@@ -54,9 +51,6 @@ public class Omni extends LinearOpMode {
                 RevHubOrientationOnRobot.LogoFacingDirection.UP,
                 RevHubOrientationOnRobot.UsbFacingDirection.FORWARD));
         imu.initialize(parameters);
-        
-        Arm arm = new Arm();
-        arm.runOpMode();
 
         // Wait for the game to start (driver presses PLAY)
         telemetry.addData("Status", "Initialized");
@@ -85,10 +79,10 @@ public class Omni extends LinearOpMode {
             lateralx = lateralx * 1.1;
                 
             // Send calculated power to wheels
-            frontL.setPower(leftFrontPower);
-            frontR.setPower(rightFrontPower);
-            backL.setPower(leftBackPower);
-            backR.setPower(rightBackPower);
+            frontL.setPower(leftFrontPower*0.25);
+            frontR.setPower(rightFrontPower*0.25);
+            backL.setPower(leftBackPower*0.25);
+            backR.setPower(rightBackPower*0.25);
             
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
